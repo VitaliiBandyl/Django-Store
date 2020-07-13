@@ -22,6 +22,12 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'store/store.html'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        context['products_list'] = Product.objects.all()
+        return context
+
+
 class ProductDetailView(DetailView):
     """Detail Views for products"""
     model = Product
