@@ -49,12 +49,12 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
                 {% for category in categories_list %}
-                <li><a href="#">{{ category.name }}</a></li>
+                    <li><a href="#">{{ category.name }}</a></li>
                 {% endfor %}
-{#                <li><a href="#">Laptops</a></li>#}
-{#                <li><a href="#">Smartphones</a></li>#}
-{#                <li><a href="#">Cameras</a></li>#}
-{#                <li><a href="#">Accessories</a></li>#}
+                {#                <li><a href="#">Laptops</a></li>#}
+                {#                <li><a href="#">Smartphones</a></li>#}
+                {#                <li><a href="#">Cameras</a></li>#}
+                {#                <li><a href="#">Accessories</a></li>#}
             </ul>
             <!-- /NAV -->
         </div>
@@ -66,32 +66,32 @@
 
 
 {% block breadcrumb %}
-<!-- BREADCRUMB -->
-`<div id="breadcrumb" class="section">
+    <!-- BREADCRUMB -->
+    `<div id="breadcrumb" class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
         <div class="row">
-    {% block breadcrumb-tree %}
-            <div class="col-md-12">
+            {% block breadcrumb-tree %}
+                <div class="col-md-12">
 
-                <h3 class="breadcrumb-header">Regular Page</h3>
-                <ul class="breadcrumb-tree">
+                    <h3 class="breadcrumb-header">Regular Page</h3>
+                    <ul class="breadcrumb-tree">
 
 
                         <li><a href="#">Home</a></li>
                         <li class="active">Blank</li>
 
 
-                </ul>
-            </div>
-        {% endblock breadcrumb-tree %}
+                    </ul>
+                </div>
+            {% endblock breadcrumb-tree %}
         </div>
         <!-- /row -->
     </div>
     <!-- /container -->
 </div>
-<!-- /BREADCRUMB -->
+    <!-- /BREADCRUMB -->
 {% endblock breadcrumb %}
 
 {% block content %}
