@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 
-from .models import Category, Product, ProductShot, Rating, Reviews
+from .models import Category, Product, ProductShot, Rating, Reviews, Brand
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -30,9 +30,10 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """Django admin product CRUD form"""
-    list_display = ('title', 'category', 'year', 'country', 'price', 'availability', 'new',
-                    'top_selling', 'discount', 'created', 'updated')
-    list_filter = ('category', 'year', 'country', 'new', 'availability', 'top_selling')
+    list_display = ('brand', 'title', 'category', 'year', 'country', 'price', 'availability', 'new',
+                    'top_selling', 'discount')
+    list_display_links = ('title',)
+    list_filter = ('brand', 'category', 'year', 'country', 'new', 'availability', 'top_selling')
     search_fields = ('title', 'category__name')
     inlines = [ReviewInline]
     form = ProductAdminForm
@@ -41,7 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('price', 'availability', 'new', 'top_selling', 'discount')
     fieldsets = (
         (None, {
-            'fields': (('title', 'url'),)
+            'fields': (('brand', 'title', 'url'),)
     }),
       (None, {
             'fields': ('description', 'image')
@@ -75,3 +76,9 @@ class ReviewsAdmin(admin.ModelAdmin):
 class RatingAdmin(admin.ModelAdmin):
     """Django admin rating CRUD form"""
     list_display = ('product', 'star', 'ip')
+
+
+@admin.register(Brand)
+class ReviewsAdmin(admin.ModelAdmin):
+    """Django admin reviews CRUD form"""
+    list_display = ('name', 'url')

@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Category(models.Model):
     """Categories"""
-    name = models.CharField("Category", max_length=150)
+    name = models.CharField("Category", max_length=150, db_index=True)
     url = models.SlugField(max_length=150, unique=True)
     image = models.ImageField("Image", upload_to="category_images/")
 
@@ -19,9 +19,23 @@ class Category(models.Model):
         return reverse('category_list_url', ) # kwargs={'url': self.url})
 
 
+class Brand(models.Model):
+    """Brand"""
+    name = models.CharField("Brand", max_length=150, db_index=True)
+    url = models.SlugField(max_length=150, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Brand"
+        verbose_name_plural = "Brands"
+
+
 class Product(models.Model):
     """Goods"""
-    title = models.CharField("Title", max_length=100)
+    title = models.CharField("Title", max_length=100, db_index=True)
+    brand = models.ForeignKey(Brand, verbose_name="Brand", on_delete=models.CASCADE, null=True)
     description = models.TextField("Description")
     image = models.ImageField("Image", upload_to="product_images/")
     year = models.PositiveSmallIntegerField("Year", default=2020)
@@ -63,6 +77,7 @@ class ProductShot(models.Model):
         verbose_name_plural = "Additional product images"
 
 
+
 class RatingStar(models.Model):
     """Rating stars"""
     value = models.SmallIntegerField("Star", default=0)
@@ -87,6 +102,7 @@ class Rating(models.Model):
     class Meta:
         verbose_name = "Rating"
         verbose_name_plural = "Ratings"
+
 
 
 class Reviews(models.Model):
