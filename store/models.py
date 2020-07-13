@@ -16,7 +16,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def get_absolute_url(self):
-        return reverse('category_list_url', kwargs={'slug': self.url})
+        return reverse('category_list_url', kwargs={'url': self.url})
 
 
 class Product(models.Model):
@@ -38,7 +38,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('product_detail_url', kwargs={'slug': self.url, 'category': self.category})
+        return reverse('product_detail_url', kwargs={'url': self.url, 'category': self.category})
 
     def __str__(self):
         return self.title

@@ -19,7 +19,11 @@ class HomeView(ListView):
 
 class CategoryListView(ListView):
     """Views for Category"""
-
+    model = Category
+    template_name = 'store/store.html'
 
 class ProductDetailView(DetailView):
     """Detail Views for products"""
+    model = Product
+    slug_url_kwarg = 'url'
+    slug_field = 'url'
