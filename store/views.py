@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -26,15 +27,29 @@ class HomeView(ListView):
         return context
 
 
-class CategoryListView(BrandsCatagoriesView, ListView):
+class ProductListView(BrandsCatagoriesView, ListView):
     """Views for Category"""
-    model = Product
-    template_name = 'store/store.html'
+    # model = Product
 
-    # def get_context_data(self, *, object_list=None, **kwargs):
-    #     context = super().get_context_data()
-    #     context['products_list'] = Product.objects.all()
-    #     return context
+    def get_queryset(self):
+        queryset = Product.objects.all()
+        if self.request.GET.getlist('brand'):
+            queryset = queryset.filter(brand__in=self.request.GET.getlist('brand'))
+
+        if self.request.GET.getlist('category'):
+            queryset = queryset.filter(category__in=self.request.GET.getlist('category'))
+
+        if self.request.GET.getlist('price-min'):
+            queryset = queryset.filter(price__gte=self.request.GET.get('price-min'))
+
+        if self.request.GET.getlist('price-max'):
+            queryset = queryset.filter(price__lte=self.request.GET.get('price-max'))
+
+        return queryset
+
+
+class FilterProductView(BrandsCatagoriesView, ListView):
+    """Filters product"""
 
 
 class ProductDetailView(DetailView):
