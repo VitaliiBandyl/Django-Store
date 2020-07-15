@@ -16,7 +16,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def get_absolute_url(self):
-        return reverse('category_list_url', ) # kwargs={'url': self.url})
+        return reverse('category_list_url')
 
 
 class Brand(models.Model):
@@ -54,8 +54,18 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail_url', kwargs={'url': self.url, 'category': self.category})
 
+    def get_add_to_cart_url(self):
+        return reverse("add-to-cart", kwargs={
+            'url': self.url
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'url': self.url
+        })
+
     def __str__(self):
-        return self.title
+        return f'{self.brand} {self.title}'
 
     class Meta:
         verbose_name = "Product"
