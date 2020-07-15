@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.views.generic import ListView, DetailView
 
 from store.models import Category, Product, Brand
@@ -49,3 +50,15 @@ class ProductDetailView(DetailView):
     model = Product
     slug_url_kwarg = 'url'
     slug_field = 'url'
+
+
+class SearchView(ListView):
+    """Search"""
+
+    def get_queryset(self):
+        queryset =  Product.objects.filter(
+            Q(title__icontains=self.request.GET.get("q"))|
+            Q(brand__name__icontains=self.request.GET.get("q"))
+        ).distinct()
+
+        return queryset
