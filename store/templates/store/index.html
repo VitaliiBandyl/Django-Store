@@ -45,14 +45,6 @@
                 <div class="col-md-12">
                     <div class="section-title">
                         <h3 class="title">New Products</h3>
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                                {% for category in categories_list %}
-                                    <li><a data-toggle="tab" href="#tab1">{{ category.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <!-- /section title -->
@@ -79,7 +71,7 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">{{ product.category }}</p>
-                                                    <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                                    <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h3>
                                                     <h4 class="product-price">${{ product.price }} <del class="product-old-price">${{ product.price }}</del></h4>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
@@ -95,7 +87,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="add-to-cart">
-                                                    <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn">Add to cart<i class="fa fa-shopping-cart"></i></a>
+                                                    <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn">Add to cart</a>
                                                 </div>
                                             </div>
                                             <!-- /product -->
@@ -174,15 +166,6 @@
                 <div class="col-md-12">
                     <div class="section-title">
                         <h3 class="title">Top selling</h3>
-                        <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav">
-                                <li ><a data-toggle="tab" href="#tab2">Laptops</a></li>
-                                {% for category in categories_list %}
-                                    <li {% if smth %}class="active"{% endif %}>
-                                        <a data-toggle="tab" href="#tab1">{{ category.name }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <!-- /section title -->
@@ -211,7 +194,7 @@
                                                 </div>
                                                 <div class="product-body">
                                                     <p class="product-category">{{ product.category }}</p>
-                                                    <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h3>
+                                                    <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h3>
                                                     <h4 class="product-price">${{ product.price }} <del class="product-old-price">${{ product.price }}</del></h4>
                                                     <div class="product-rating">
                                                         <i class="fa fa-star"></i>
@@ -227,7 +210,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="add-to-cart">
-                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    <a href="{% url 'cart_add' product.id %}" style="height: 1.5em" class="add-to-cart-btn">Add to cart</a>
                                                 </div>
                                             </div>
                                             <!-- /product -->

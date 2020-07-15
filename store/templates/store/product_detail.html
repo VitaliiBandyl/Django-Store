@@ -7,7 +7,7 @@
         <ul class="breadcrumb-tree">
             <li><a href="{% url 'home_url' %}">Home</a></li>
             <li><a href="{{ product.category.url }}">{{ product.category.name }}</a></li>
-            <li class="active">{{ product.title }}</li>
+            <li class="active">{{ product }}</li>
         </ul>
     </div>
 {% endblock breadcrumb-tree %}
@@ -54,7 +54,7 @@
                 <!-- Product details -->
                 <div class="col-md-5">
                     <div class="product-details">
-                        <h2 class="product-name">{{ product.title }}</h2>
+                        <h2 class="product-name">{{ product }}</h2>
                         <div>
                             <div class="product-rating">
                                 <i class="fa fa-star"></i>
@@ -95,7 +95,7 @@
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                            <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                            <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
                         </div>
 
                         <ul class="product-btns">
