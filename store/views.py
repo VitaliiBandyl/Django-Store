@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView
 from store.models import Category, Product, Brand
 
 
-class BrandsCatagoriesView:
+class BrandsCategories:
     """returns all brands"""
     def get_brands(self):
         return Brand.objects.all()
@@ -25,7 +25,7 @@ class HomeView(ListView):
         return context
 
 
-class ProductListView(BrandsCatagoriesView, ListView):
+class ProductListView(BrandsCategories, ListView):
     """Views for Category"""
 
     def get_queryset(self):
@@ -50,6 +50,12 @@ class ProductDetailView(DetailView):
     model = Product
     slug_url_kwarg = 'url'
     slug_field = 'url'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        current_category = self.kwargs.get('category')
+        context['related_products'] = Product.objects.filter(category__name=current_category)
+        return context
 
 
 class SearchView(ListView):
