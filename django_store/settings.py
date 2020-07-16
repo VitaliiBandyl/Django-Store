@@ -40,9 +40,10 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
-    'cart',
 
+    'cart.apps.CartConfig',
     'store.apps.StoreConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
