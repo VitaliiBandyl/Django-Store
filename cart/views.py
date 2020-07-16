@@ -1,13 +1,7 @@
 from django.views import View
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from store.models import Product
 from cart.cart import Cart
-
-
-class CartDetailView(View):
-    """Cart View"""
-    def get(self, request):
-        return render(request, 'cart/checkout.html')
 
 
 class CartAddItem(View):

@@ -71,12 +71,12 @@
                                      {% for key,value in request.session.cart.items %}
                                     <div class="product-widget">
                                         <div class="product-img">
-                                            <img src=" {{value.image}}" alt="">
+                                            <img src=" {{ value.image }}" alt="">
                                         </div>
 
                                         <div class="product-body">
                                             <h3 class="product-name"><a href="#">{{ value.name }}</a></h3>
-                                            <h4 class="product-price"><span class="qty">{{value.quantity}}x</span>${{ value.price|multiply:value.quantity }}</h4>
+                                            <h4 class="product-price"><span class="qty">{{ value.quantity }}x</span>${{ value.price|multiply:value.quantity }}</h4>
                                         </div>
                                         <a href="{% url 'item_clear' value.product_id %}" class="delete"><i class="fa fa-close"></i></a>
                                     </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="cart-summary">
                                     <small>{{request.session.cart|length}} Item(s) selected</small>
-                                     <h5>SUBTOTAL: {{cart_total_amount}}$</h5>
+                                     <h5>SUBTOTAL: {{ cart_total_amount }}$</h5>
                                 </div>
                                          {% endif %}
 
@@ -93,13 +93,13 @@
                             {% else %}
                              </div>
                                 <div class="cart-summary">
-                                    <small>{{request.session.cart|length}} Item(s) selected</small>
+                                    <small>{{ request.session.cart|length }} Item(s) selected</small>
                                      <h5>SUBTOTAL: {{ value.total_price }}$</h5>
                                 </div>
                         {% endif %}
                                 <div class="cart-btns">
                                     <a href="#">View Cart</a>
-                                    <a href="{% url 'cart_detail_url' %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="{% url 'order_create' %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>

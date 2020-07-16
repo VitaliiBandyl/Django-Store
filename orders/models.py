@@ -15,7 +15,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField('Pay Status', default=False)
-    order_notes = models.CharField('Additional information', max_length=2000)
+    order_notes = models.CharField('Additional information', max_length=2000, blank=True)
 
     class Meta:
         ordering = ('-created',)
@@ -23,7 +23,7 @@ class Order(models.Model):
         verbose_name_plural = 'Orders'
 
     def __str__(self):
-        return f'Order {self.id}'
+        return f'Order id: {self.id}'
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())

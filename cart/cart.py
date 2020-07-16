@@ -1,4 +1,8 @@
+from decimal import Decimal
+
 from django.conf import settings
+
+from store.models import Product
 
 
 class Cart:
@@ -13,11 +17,9 @@ class Cart:
         self.cart = cart
 
     def add(self, product, quantity=1, action=None):
-        """
-        Add a product to the cart or update its quantity.
-        """
+        """Add a product to the cart or update its quantity."""
         id = product.id
-        newItem = True
+        new_item = True
         if str(product.id) not in self.cart.keys():
 
             self.cart[product.id] = {
@@ -29,16 +31,16 @@ class Cart:
                 'image': product.image.url
             }
         else:
-            newItem = True
+            new_item = True
 
             for key, value in self.cart.items():
                 if key == str(product.id):
 
                     value['quantity'] = value['quantity'] + 1
-                    newItem = False
+                    new_item = False
                     self.save()
                     break
-            if newItem == True:
+            if new_item == True:
 
                 self.cart[product.id] = {
                     'userid': self.request.user,
@@ -51,7 +53,7 @@ class Cart:
         self.save()
 
     def save(self):
-        # update the session cart
+        """update the session cart"""
         self.session[settings.CART_SESSION_ID] = self.cart
         # mark the session as "modified" to make sure it is saved
         self.session.modified = True
@@ -62,3 +64,29 @@ class Cart:
         if product_id in self.cart:
             del self.cart[product_id]
             self.save()
+
+    def clear(self):
+        """Remove all items from cart"""
+        self.session[settings.CART_SESSION_ID] = {}
+        self.session.modified = True
+
+    def __iter__(self):
+        """Iterates items in the cart and retrieving products from the database."""
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+
+        for item in self.cart.values():
+            item['price'] = Decimal(item['price'])
+            item['total_price'] = item['price'] * item['quantity']
+            yield item
+
+    def __len__(self):
+        """Counts the number of items in the cart"""
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        """Calculate cart total amount."""
+        return sum(Decimal(item['price']) * item['quantity'] for item in
+                   self.cart.values())
