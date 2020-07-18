@@ -88,33 +88,6 @@ class ProductShot(models.Model):
 
 
 
-class RatingStar(models.Model):
-    """Rating stars"""
-    value = models.SmallIntegerField("Star", default=0)
-
-    def __str__(self):
-        return str(self.value)
-
-    class Meta:
-        verbose_name = "Rating Star"
-        verbose_name_plural = "Rating Stars"
-
-
-class Rating(models.Model):
-    """Rating"""
-    ip = models.CharField("IP address", max_length=15)
-    star = models.ForeignKey(RatingStar, verbose_name="Rating Star", on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, verbose_name="Product", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.star} - {self.product}"
-
-    class Meta:
-        verbose_name = "Rating"
-        verbose_name_plural = "Ratings"
-
-
-
 class Reviews(models.Model):
     """Reviews"""
     email = models.EmailField()

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 
-from .models import Category, Product, ProductShot, Rating, Reviews, Brand
+from .models import Category, Product, ProductShot, Reviews, Brand
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -72,13 +72,7 @@ class ReviewsAdmin(admin.ModelAdmin):
     readonly_fields = ('name', 'email', 'product')
 
 
-@admin.register(Rating)
-class RatingAdmin(admin.ModelAdmin):
-    """Django admin rating CRUD form"""
-    list_display = ('product', 'star', 'ip')
-
-
 @admin.register(Brand)
-class ReviewsAdmin(admin.ModelAdmin):
+class BrandAdmin(admin.ModelAdmin):
     """Django admin reviews CRUD form"""
     list_display = ('name', 'url')

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load ratings %}
 
 {% block title %}{% endblock title %}
 
@@ -73,13 +74,7 @@
                                                     <p class="product-category">{{ product.category }}</p>
                                                     <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h3>
                                                     <h4 class="product-price">${{ product.price }} <del class="product-old-price">${{ product.price }}</del></h4>
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
+                                                    {% ratings product %}
                                                     <div class="product-btns">
                                                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
@@ -196,13 +191,8 @@
                                                     <p class="product-category">{{ product.category }}</p>
                                                     <h3 class="product-name"><a href="{{ product.get_absolute_url }}">{{ product }}</a></h3>
                                                     <h4 class="product-price">${{ product.price }} <del class="product-old-price">${{ product.price }}</del></h4>
-                                                    <div class="product-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
+
+                                                    {% ratings product %}
                                                     <div class="product-btns">
                                                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
