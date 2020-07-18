@@ -132,54 +132,17 @@
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
+                                            {% for review in product.reviews_set.all %}
                                             <li>
                                                 <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
+                                                    <h5 class="name">{{ review.name }}</h5>
+                                                    <p class="date">{{ review.created }}</p>
                                                 </div>
                                                 <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    <p>{{ review.text }}</p>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
+                                            {% endfor %}
                                         </ul>
                                         <ul class="reviews-pagination">
                                             <li class="active">1</li>
@@ -194,12 +157,13 @@
 
                                 <!-- Review Form -->
                                 <div class="col-md-3" style="">
-                                    <div id="review-form">
-                                        <form class="review-form">
-                                            <input class="input" type="text" placeholder="Your Name">
-                                            <input class="input" type="email" placeholder="Your Email">
-                                            <textarea class="input" placeholder="Your Review"></textarea>
-                                            <button class="primary-btn">Submit</button>
+                                    <div id="review-form" >
+                                        <form class="review-form" action="{% url 'add_review' product.id %}" method="post">
+                                           {% csrf_token %}
+                                            <input class="input" type="text" name="name" placeholder="Your Name" required>
+                                            <input class="input" type="email" name="email" placeholder="Your Email" required>
+                                            <textarea class="input" name="text" placeholder="Your Review" required></textarea>
+                                            <button type="submit" class="primary-btn">Submit</button>
                                         </form>
                                     </div>
                                 </div>

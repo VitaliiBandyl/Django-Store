@@ -1,7 +1,10 @@
 from django.db.models import Q
+from django.shortcuts import redirect
+from django.views import View
 from django.views.generic import ListView, DetailView
 
 from store.models import Category, Product, Brand
+from .forms import ReviewForm
 
 
 class BrandsCategories:
@@ -68,3 +71,16 @@ class SearchView(ListView):
         ).distinct()
 
         return queryset
+
+
+class AddReview(View):
+    """Add Review to product"""
+
+    def post(self, request, pk):
+        form = ReviewForm(request.POST)
+        product = Product.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.product = product
+            form.save()
+        return redirect(product.get_absolute_url())

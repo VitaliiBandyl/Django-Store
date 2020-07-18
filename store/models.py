@@ -94,6 +94,7 @@ class Reviews(models.Model):
     name = models.CharField("Name", max_length=100)
     text = models.TextField("Message", max_length=5000)
     product = models.ForeignKey(Product, verbose_name="Product", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.name} - {self.product}"
