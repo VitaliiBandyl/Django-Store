@@ -10,8 +10,14 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'account_logout' %}"><i class="fa fa-user-o"></i>Logout</a></li>
+                    <li><a><i class="fa fa-user-o"></i>{{ user.username }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_signup' %}"><i class="fa fa-user-o"></i>Sign up</a></li>
+                    <li><a href="{% url 'account_login' %}"><i class="fa fa-user-o"></i>Login</a></li>
+                {% endif %}
+
             </ul>
         </div>
     </div>
@@ -67,59 +73,58 @@
                             <div class="cart-dropdown">
 
                                 <div class="cart-list">
-                                {% if request.session.cart.items %}
-                                     {% for key,value in request.session.cart.items %}
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src=" {{ value.image }}" alt="">
+                                    {% if request.session.cart.items %}
+                                        {% for key,value in request.session.cart.items %}
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src=" {{ value.image }}" alt="">
+                                                </div>
+
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">{{ value.name }}</a></h3>
+                                                    <h4 class="product-price"><span class="qty">{{ value.quantity }}x</span>${{ value.price|multiply:value.quantity }}</h4>
+                                                </div>
+                                                <a href="{% url 'item_clear' value.product_id %}" class="delete"><i class="fa fa-close"></i></a>
+                                            </div>
+                                            {% if forloop.last %}
+                                                </div>
+                                                <div class="cart-summary">
+                                                    <small>{{request.session.cart|length}} Item(s) selected</small>
+                                                    <h5>SUBTOTAL: {{ cart_total_amount }}$</h5>
+                                                </div>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                    {% else %}
                                         </div>
-
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">{{ value.name }}</a></h3>
-                                            <h4 class="product-price"><span class="qty">{{ value.quantity }}x</span>${{ value.price|multiply:value.quantity }}</h4>
+                                        <div class="cart-summary">
+                                            <small>{{ request.session.cart|length }} Item(s) selected</small>
+                                            <h5>SUBTOTAL: {{ value.total_price }}$</h5>
                                         </div>
-                                        <a href="{% url 'item_clear' value.product_id %}" class="delete"><i class="fa fa-close"></i></a>
-                                    </div>
-{% if forloop.last %}
-                                </div>
-                                <div class="cart-summary">
-                                    <small>{{request.session.cart|length}} Item(s) selected</small>
-                                     <h5>SUBTOTAL: {{ cart_total_amount }}$</h5>
-                                </div>
-                                         {% endif %}
-
-                                {% endfor %}
-
-                            {% else %}
-                             </div>
-                                <div class="cart-summary">
-                                    <small>{{ request.session.cart|length }} Item(s) selected</small>
-                                     <h5>SUBTOTAL: {{ value.total_price }}$</h5>
-                                </div>
-                        {% endif %}
-                                <div class="cart-btns">
-                                    <a href="#">View Cart</a>
-                                    <a href="{% url 'order_create' %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
+                                    {% endif %}
+                            <div class="cart-btns">
+                                <a href="#">View Cart</a>
+                                <a href="{% url 'order_create' %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
-                        <!-- /Cart -->
-
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                        <!-- /Menu Toogle -->
                     </div>
+                    <!-- /Cart -->
+
+                    <!-- Menu Toogle -->
+                    <div class="menu-toggle">
+                        <a href="#">
+                            <i class="fa fa-bars"></i>
+                            <span>Menu</span>
+                        </a>
+                    </div>
+                    <!-- /Menu Toogle -->
                 </div>
-                <!-- /ACCOUNT -->
             </div>
-            <!-- row -->
+            <!-- /ACCOUNT -->
         </div>
-        <!-- container -->
+        <!-- row -->
     </div>
+    <!-- container -->
     <!-- /MAIN HEADER -->
 </header>

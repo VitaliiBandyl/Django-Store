@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block breadcrumb-tree %}
+    <div class="col-md-12">
+        <ul class="breadcrumb-tree">
+            <li><a href="{% url 'home_url' %}">Home</a></li>
+            <li class="active">Login Page</li>
+        </ul>
+    </div>
+{% endblock breadcrumb-tree %}
+
+{% block content %}
+    <form method="post" action="{{ lo }}">
+        {% csrf_token %}
+  <table>{{ form.as_table }}</table>
+  <button type="submit">Send</button>
+</form>
+{% endblock content %}

@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'ckeditor',
     'ckeditor_uploader',
     'star_ratings',
+    'allauth',
+    'allauth.account',
 
     'cart.apps.CartConfig',
     'store.apps.StoreConfig',
@@ -90,6 +93,11 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -131,15 +139,24 @@ STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR]
 
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# CKEditor configuration
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
+# Session configuration
 CART_SESSION_ID = 'cart'
 
 # Rating star configuration
 STAR_RATINGS_RERATE = True
-
 STAR_RATINGS_STAR_HEIGHT = 20
 STAR_RATINGS_STAR_WIDTH = 20
+
+# Registration configuration
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_REDIRECT_URL = "/"
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+SITE_ID = 1
