@@ -12,6 +12,7 @@
             <ul class="header-links pull-right">
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'account_logout' %}"><i class="fa fa-user-o"></i>Logout</a></li>
+                    <li><a href="{% url 'account_change_password' %}"><i class="fa fa-user-o"></i>Change Password</a></li>
                     <li><a><i class="fa fa-user-o"></i>{{ user.username }}</a></li>
                 {% else %}
                     <li><a href="{% url 'account_signup' %}"><i class="fa fa-user-o"></i>Sign up</a></li>
