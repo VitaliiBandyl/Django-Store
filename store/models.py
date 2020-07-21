@@ -64,6 +64,9 @@ class Product(models.Model):
             'slug': self.slug
         })
 
+    def get_price_with_discount(self):
+        return self.price / 100 * (100 - self.discount)
+
     def __str__(self):
         return f'{self.brand} {self.title}'
 

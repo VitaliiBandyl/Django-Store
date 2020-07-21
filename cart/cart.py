@@ -27,8 +27,8 @@ class Cart:
                 'product_id': id,
                 'name': product.title,
                 'quantity': 1,
-                'price': str(product.price),
-                'image': product.image.slug
+                'price': str(product.get_price_with_discount()),
+                'image': product.image.url
             }
         else:
             new_item = True
@@ -47,8 +47,8 @@ class Cart:
                     'product_id': product.id,
                     'name': product.title,
                     'quantity': 1,
-                    'price': str(product.price),
-                    'image': product.image.slug
+                    'price': str(product.get_price_with_discount()),
+                    'image': product.image.url
                 }
         self.save()
 
