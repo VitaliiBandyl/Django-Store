@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.core.exceptions import ValidationError
+from django.shortcuts import render, redirect
 from django.views import View
 
 from .models import OrderItem
@@ -15,6 +16,9 @@ class CreateOrderView(View):
     def post(self, request):
         cart = Cart(request)
         form = OrderCreateForm(request.POST)
+        if not cart.cart:
+            return redirect('home_url')
+
         if form.is_valid():
             order = form.save()
             for item in cart:

@@ -18,13 +18,13 @@ class BrandsCategories:
 
 class HomeView(ListView):
     """Views for Home Page"""
-    model = Product
     template_name = 'store/index.html'
-    
+    queryset = Product.objects.filter(draft=False)
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        context['categories_list'] = Category.objects.all()
-        context['popular_categories'] = Category.objects.all()[0:3]
+        context['categories_list'] = Category.objects.filter(product__draft=False)
+        context['popular_categories'] = Category.objects.filter(product__draft=False)[0:3]
         return context
 
 
@@ -45,14 +45,12 @@ class ProductListView(BrandsCategories, ListView):
         if self.request.GET.getlist('price-max'):
             queryset = queryset.filter(price__lte=self.request.GET.get('price-max'))
 
-        return queryset
+        return queryset.filter(draft=False)
 
 
 class ProductDetailView(DetailView):
     """Detail Views for products"""
     model = Product
-    slug_url_kwarg = 'url'
-    slug_field = 'url'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -68,7 +66,7 @@ class SearchView(ListView):
         queryset =  Product.objects.filter(
             Q(title__icontains=self.request.GET.get("q"))|
             Q(brand__name__icontains=self.request.GET.get("q"))
-        ).distinct()
+        ).filter(draft=False).distinct()
 
         return queryset
 

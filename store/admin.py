@@ -42,7 +42,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ('price', 'availability', 'new', 'top_selling', 'discount')
     fieldsets = (
         (None, {
-            'fields': (('brand', 'title', 'url'),)
+            'fields': (('brand', 'title', 'slug'),)
     }),
       (None, {
             'fields': ('description', 'image')

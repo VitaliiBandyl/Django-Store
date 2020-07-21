@@ -42,7 +42,7 @@ class Product(models.Model):
     country = models.CharField("Country", max_length=30)
     price = models.DecimalField("Price", max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE, null=True)
-    url = models.SlugField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
     draft = models.BooleanField("Draft", default=False)
     availability = models.BooleanField("Availability", default=True)
     new = models.BooleanField('New', default=True)
@@ -52,16 +52,16 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('product_detail_url', kwargs={'url': self.url, 'category': self.category})
+        return reverse('product_detail_url', kwargs={'slug': self.slug, 'category': self.category})
 
     def get_add_to_cart_url(self):
         return reverse("add-to-cart", kwargs={
-            'url': self.url
+            'slug': self.slug
         })
 
     def get_remove_from_cart_url(self):
         return reverse("remove-from-cart", kwargs={
-            'url': self.url
+            'slug': self.slug
         })
 
     def __str__(self):
@@ -102,4 +102,3 @@ class Reviews(models.Model):
     class Meta:
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
-
