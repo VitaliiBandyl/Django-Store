@@ -4,6 +4,7 @@
 {% load account %}
 {#socialaccount %}#}
 
+
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block breadcrumb-tree %}
@@ -22,7 +23,7 @@
             <div class="col-lg-6 col-md-6 col-xs-12">
                 <h1>{% trans "Sign In" %}</h1>
 
-                {#{% get_providers as socialaccount_providers %}#}
+{#                {% get_providers as socialaccount_providers %}#}
 
                 {% if socialaccount_providers %}
                     <p>{% blocktrans with site.name as site_name %}Please sign in with one

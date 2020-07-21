@@ -4,7 +4,7 @@ from django.urls import reverse
 
 class Category(models.Model):
     """Categories"""
-    name = models.CharField("Category", max_length=150, db_index=True)
+    name = models.CharField("Category", max_length=150, unique=True)
     url = models.SlugField(max_length=150, unique=True)
     image = models.ImageField("Image", upload_to="category_images/")
 
@@ -21,7 +21,7 @@ class Category(models.Model):
 
 class Brand(models.Model):
     """Brand"""
-    name = models.CharField("Brand", max_length=150, db_index=True)
+    name = models.CharField("Brand", max_length=150, unique=True)
     url = models.SlugField(max_length=150, unique=True)
 
     def __str__(self):
