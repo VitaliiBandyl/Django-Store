@@ -53,7 +53,11 @@
                         <a class="review-link" href="#">{{ product.reviews_set.count }} Review(s) | Add your review</a>
 
                         <div>
-                            <h3 class="product-price">${{ product.price }} <del class="product-old-price">${{ product.price }}</del></h3>
+                            {% if product.discount %}
+                                <h3 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h3>
+                            {% else %}
+                                <h4 class="product-price">${{ product.price }}</h4>
+                            {% endif %}
                             {% if product.availability %} <span class="product-available">In Stock</span> {% endif %}
                         </div>
                         {{ product.description|safe }}
@@ -190,7 +194,11 @@
                             <div class="product-body">
                                 <p class="product-category">{{ product.category }}</p>
                                 <h3 class="product-name"><a href="{{ product.slug }}">{{ product }}</a></h3>
-                                <h4 class="product-price">${{ product.price }} <del class="product-old-price">$990.00</del></h4>
+                                {% if product.discount %}
+                                    <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
+                                {% else %}
+                                    <h4 class="product-price">${{ product.price }}</h4>
+                                {% endif %}
                                 <div class="product-rating">
                                     {% ratings product %}
                                 </div>
