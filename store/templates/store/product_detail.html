@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <ul class="breadcrumb-tree">
             <li><a href="{% url 'home_url' %}">Home</a></li>
-            <li><a href="{{ product.category.url }}">{{ product.category.name }}</a></li>
+            <li><a href="/product_list/?category={{ product.category.pk }}">{{ product.category.name }}</a></li>
             <li class="active">{{ product }}</li>
         </ul>
     </div>
@@ -50,7 +50,7 @@
                             {% ratings object %}
                         </div>
 
-                        <a class="review-link" href="#">{{ product.reviews_set.count }} Review(s) | Add your review</a>
+                        <p class="review-link">{{ product.reviews_set.count }} Review(s)</p>
 
                         <div>
                             {% if product.discount %}
@@ -67,11 +67,6 @@
                         <div class="add-to-cart">
                             <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
                         </div>
-
-                        <ul class="product-btns">
-                            <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                            <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-                        </ul>
 
                         <ul class="product-links">
                             <li>Category:</li>
@@ -130,20 +125,13 @@
                                                 </li>
                                             {% endfor %}
                                         </ul>
-                                        <ul class="reviews-pagination">
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <!-- /Reviews -->
 
                                 <!-- Review Form -->
                                 <div class="col-md-3" style="">
-                                    <div id="review-form" >
+                                    <div id="review-form">
                                         <form class="review-form" action="{% url 'add_review' product.id %}" method="post">
                                             {% csrf_token %}
                                             <input class="input" type="text" name="name" placeholder="Your Name" required>
@@ -201,11 +189,6 @@
                                 {% endif %}
                                 <div class="product-rating">
                                     {% ratings product %}
-                                </div>
-                                <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                 </div>
                             </div>
                             <div class="add-to-cart">

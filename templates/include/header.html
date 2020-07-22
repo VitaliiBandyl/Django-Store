@@ -5,9 +5,9 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i> 063-45-47-144</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> vitaliibandyl@gmail.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Kyiv / remote</a></li>
             </ul>
             <ul class="header-links pull-right">
                 {% if user.is_authenticated %}
@@ -54,16 +54,6 @@
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
                         <!-- Cart -->
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -105,7 +95,7 @@
                                         </div>
                                     {% endif %}
                             <div class="cart-btns">
-                                <a href="#">View Cart</a>
+                                <a href="{% url 'order_create' %}">View Cart</a>
                                 <a href="{% url 'order_create' %}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
                             </div>
                         </div>

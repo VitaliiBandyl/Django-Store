@@ -79,11 +79,6 @@
                                                         <h4 class="product-price">${{ product.price }}</h4>
                                                     {% endif %}
                                                     {% ratings product %}
-                                                    <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                    </div>
                                                 </div>
                                                 <div class="add-to-cart">
                                                     <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn">Add to cart</a>
@@ -197,11 +192,6 @@
                                                     <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
 
                                                     {% ratings product %}
-                                                    <div class="product-btns">
-                                                        <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                        <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                        <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                                    </div>
                                                 </div>
                                                 <div class="add-to-cart">
                                                     <a href="{% url 'cart_add' product.id %}" style="height: 1.5em" class="add-to-cart-btn">Add to cart</a>

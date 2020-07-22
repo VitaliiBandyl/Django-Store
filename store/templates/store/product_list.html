@@ -1,203 +1,161 @@
-    {% extends 'base.html' %}
-    {% load ratings %}
-    {% load store_tags %}
-    {% block title %}{% endblock title %}
+{% extends 'base.html' %}
+{% load ratings %}
+{% load store_tags %}
+{% block title %}{% endblock title %}
 
-    {% block breadcrumb-tree %}
-        <div class="col-md-12">
-            <ul class="breadcrumb-tree">
-                <li><a href="{% url 'home_url' %}">Home</a></li>
-                <li class="active">All Categories</li>
-            </ul>
-        </div>
-    {% endblock breadcrumb-tree %}
+{% block breadcrumb-tree %}
+    <div class="col-md-12">
+        <ul class="breadcrumb-tree">
+            <li><a href="{% url 'home_url' %}">Home</a></li>
+            <li class="active">All Categories</li>
+        </ul>
+    </div>
+{% endblock breadcrumb-tree %}
 
-    {% block content %}
-        <!-- SECTION -->
-        <div class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <!-- ASIDE -->
-                    <div id="aside" class="col-md-3">
-                        <form action="{% url 'product_list_url' %}" method="get">
-                            <!-- aside Widget -->
-                            <div class="aside">
-                                <h3 class="aside-title">Categories</h3>
-                                <div class="checkbox-filter">
-                                    {% for category in categories_list %}
-                                        <div class="input-checkbox">
-                                            <input type="checkbox" id="category-{{ forloop.counter }}" name="category"  value="{{ category.id }}">
-                                            <label for="category-{{ forloop.counter }}">
-                                                <span></span>
-                                                {{ category.name }}
-                                                <small>({{ category.product_set.count }})</small>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-
-                                </div>
-                            </div>
-                            <!-- /aside Widget -->
-
-                            <!-- aside Widget -->
-                            <div class="aside">
-                                <h3 class="aside-title">Price</h3>
-                                <div type="range" class="price-filter">
-                                    <div id="price-slider"></div>
-                                    <div class="input-number price-min">
-                                        <input id="price-min" type="number" name="price-min">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
+{% block content %}
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- ASIDE -->
+                <div id="aside" class="col-md-3">
+                    <form action="{% url 'product_list_url' %}" method="get">
+                        <!-- aside Widget -->
+                        <div class="aside">
+                            <h3 class="aside-title">Categories</h3>
+                            <div class="checkbox-filter">
+                                {% for category in categories_list %}
+                                    <div class="input-checkbox">
+                                        <input type="checkbox" id="category-{{ forloop.counter }}" name="category"  value="{{ category.id }}">
+                                        <label for="category-{{ forloop.counter }}">
+                                            <span></span>
+                                            {{ category.name }}
+                                            <small>({{ category.product_set.count }})</small>
+                                        </label>
                                     </div>
-                                    <span>-</span>
-                                    <div class="input-number price-max">
-                                        <input id="price-max" type="number" name="price-max">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /aside Widget -->
-
-                            <!-- aside Widget -->
-
-                            <div class="aside">
-                                <h3 class="aside-title">Brands</h3>
-
-                                <div class="checkbox-filter">
-                                    {% get_brands as brands_list %}
-                                    {% for brand in brands_list %}
-                                        <div class="input-checkbox">
-                                            <input type="checkbox" id="brand-{{ forloop.counter }}" name="brand" value="{{ brand.id }}">
-                                            <label for="brand-{{ forloop.counter }}">
-                                                <span></span>
-                                                {{ brand }}
-                                                <small>({{ brand.product_set.count }})</small>
-                                            </label>
-                                        </div>
-                                    {% endfor %}
-                                </div>
+                                {% endfor %}
 
                             </div>
-                            <button type="submit" class="btn btn-info">Find</button>
-                        </form>
+                        </div>
                         <!-- /aside Widget -->
 
                         <!-- aside Widget -->
                         <div class="aside">
-                            <h3 class="aside-title">Top selling</h3>
-                            {% for product in product_list %}
-                                {% if forloop.counter < 4 %}
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="{{ product.image.url }}" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <p class="product-category">{{ product.category }}</p>
-                                            <h3 class="product-name"><a href="{{ product.slug }}">{{ product.title }}</a></h3>
-                                            {% if product.discount %}
-                                                <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
-                                            {% else %}
-                                                <h4 class="product-price">${{ product.price }}</h4>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-
+                            <h3 class="aside-title">Price</h3>
+                            <div type="range" class="price-filter">
+                                <div id="price-slider"></div>
+                                <div class="input-number price-min">
+                                    <input id="price-min" type="number" name="price-min">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                                <span>-</span>
+                                <div class="input-number price-max">
+                                    <input id="price-max" type="number" name="price-max">
+                                    <span class="qty-up">+</span>
+                                    <span class="qty-down">-</span>
+                                </div>
+                            </div>
                         </div>
                         <!-- /aside Widget -->
-                    </div>
-                    <!-- /ASIDE -->
 
-                    <!-- STORE -->
-                    <div id="store" class="col-md-9">
-                        <!-- store top filter -->
-                        <div class="store-filter clearfix">
-                            <div class="store-sort">
-                                <label>
-                                    Sort By:
-                                    <select class="input-select">
-                                        <option value="0">Popular</option>
-                                        <option value="1">Position</option>
-                                    </select>
-                                </label>
+                        <!-- aside Widget -->
 
-                                <label>
-                                    Show:
-                                    <select class="input-select">
-                                        <option value="0">20</option>
-                                        <option value="1">50</option>
-                                    </select>
-                                </label>
+                        <div class="aside">
+                            <h3 class="aside-title">Brands</h3>
+
+                            <div class="checkbox-filter">
+                                {% get_brands as brands_list %}
+                                {% for brand in brands_list %}
+                                    <div class="input-checkbox">
+                                        <input type="checkbox" id="brand-{{ forloop.counter }}" name="brand" value="{{ brand.id }}">
+                                        <label for="brand-{{ forloop.counter }}">
+                                            <span></span>
+                                            {{ brand }}
+                                            <small>({{ brand.product_set.count }})</small>
+                                        </label>
+                                    </div>
+                                {% endfor %}
                             </div>
-                            <ul class="store-grid">
-                                <li class="active"><i class="fa fa-th"></i></li>
-                                <li><a href="#"><i class="fa fa-th-list"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- /store top filter -->
 
-                        <!-- store products -->
-                        <div class="row">
-                            <!-- product -->
-                            {% for product in product_list %}
-                                <div class="col-md-4 col-xs-6">
-                                    <div class="product">
-                                        <div class="product-img">
-                                            <img src="{{ product.image.url }}" alt="">
-                                            <div class="product-label">
-                                                {% if product.discount %}<span class="sale">-{{ product.discount }}%</span>{% endif %}
-                                                {% if product.new %}<span class="new">NEW</span> {% endif %}
-                                            </div>
-                                        </div>
-                                        <div class="product-body">
-                                            <p class="product-category">{{ product.category }}</p>
-                                            <h3 class="product-name"><a href="{{ product.slug }}">{{ product }}</a></h3>
-                                            {% if product.discount %}
-                                                <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
-                                            {% else %}
-                                                <h4 class="product-price">${{ product.price }}</h4>
-                                            {% endif %}
-                                            <div class="product-rating">
-                                                {% ratings product %}
-                                            </div>
-                                            <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-                                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-                                            </div>
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
-                                        </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Find</button>
+                    </form>
+                    <!-- /aside Widget -->
+
+                    <!-- aside Widget -->
+                    <div class="aside">
+                        <h3 class="aside-title">Top selling</h3>
+                        {% for product in product_list %}
+                            {% if forloop.counter < 4 %}
+                                <div class="product-widget">
+                                    <div class="product-img">
+                                        <img src="{{ product.image.url }}" alt="">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ product.category }}</p>
+                                        <h3 class="product-name"><a href="{{ product.slug }}">{{ product.title }}</a></h3>
+                                        {% if product.discount %}
+                                            <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
+                                        {% else %}
+                                            <h4 class="product-price">${{ product.price }}</h4>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                <!-- /product -->
-                            {% endfor %}
-                        </div>
-                        <!-- /store products -->
+                            {% endif %}
+                        {% endfor %}
 
-                        <!-- store bottom filter -->
-                        <div class="store-filter clearfix">
-                            <span class="store-qty">Showing 20-100 products</span>
-                            <ul class="store-pagination">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
-                        <!-- /store bottom filter -->
                     </div>
-                    <!-- /STORE -->
+                    <!-- /aside Widget -->
                 </div>
-                <!-- /row -->
+                <!-- /ASIDE -->
+
+                <!-- STORE -->
+                <div id="store" class="col-md-9">
+
+
+                    <!-- store products -->
+                    <div class="row">
+                        <!-- product -->
+                        {% for product in product_list %}
+                            <div class="col-md-4 col-xs-6">
+                                <div class="product">
+                                    <div class="product-img">
+                                        <img src="{{ product.image.url }}" alt="">
+                                        <div class="product-label">
+                                            {% if product.discount %}<span class="sale">-{{ product.discount }}%</span>{% endif %}
+                                            {% if product.new %}<span class="new">NEW</span> {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category">{{ product.category }}</p>
+                                        <h3 class="product-name"><a href="{{ product.slug }}">{{ product }}</a></h3>
+                                        {% if product.discount %}
+                                            <h4 class="product-price">${{ product.get_price_with_discount }} <del class="product-old-price">${{ product.price }}</del></h4>
+                                        {% else %}
+                                            <h4 class="product-price">${{ product.price }}</h4>
+                                        {% endif %}
+                                        <div class="product-rating">
+                                            {% ratings product %}
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /product -->
+                        {% endfor %}
+                    </div>
+                    <!-- /store products -->
+                </div>
+                <!-- /STORE -->
             </div>
-            <!-- /container -->
+            <!-- /row -->
         </div>
-        <!-- /SECTION -->
-    {% endblock content %}
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+{% endblock content %}
