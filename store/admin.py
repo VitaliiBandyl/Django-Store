@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 
-from .models import Category, Product, ProductShot, Reviews, Brand
+from .models import Category, Product, ProductShot, Review, Brand
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
@@ -14,8 +14,8 @@ class ProductAdminForm(forms.ModelForm):
 
 
 class ReviewInline(admin.StackedInline):
-    """Reviews inline view"""
-    model = Reviews
+    """Review inline view"""
+    model = Review
     extra = 1
     readonly_fields = ('name', 'email', 'product')
 
@@ -65,14 +65,14 @@ class ProductShotAdmin(admin.ModelAdmin):
     list_display = ('title', 'product')
 
 
-@admin.register(Reviews)
-class ReviewsAdmin(admin.ModelAdmin):
-    """Django admin reviews CRUD form"""
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    """Django admin review CRUD form"""
     list_display = ('name', 'email', 'product')
     readonly_fields = ('name', 'email', 'product')
 
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    """Django admin reviews CRUD form"""
+    """Django admin brand CRUD form"""
     list_display = ('name', 'url')

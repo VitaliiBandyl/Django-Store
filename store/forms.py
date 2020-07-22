@@ -1,12 +1,12 @@
 from django import forms
 
-from .models import Reviews
+from .models import Review
 
 
 class ReviewForm(forms.ModelForm):
     """Форма отзывов"""
     class Meta:
-        model = Reviews
+        model = Review
         fields = ("name", "email", "text")
 
     name = forms.CharField(max_length=100)

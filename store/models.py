@@ -91,8 +91,8 @@ class ProductShot(models.Model):
 
 
 
-class Reviews(models.Model):
-    """Reviews"""
+class Review(models.Model):
+    """Review"""
     email = models.EmailField()
     name = models.CharField("Name", max_length=100)
     text = models.TextField("Message", max_length=5000)
@@ -104,4 +104,4 @@ class Reviews(models.Model):
 
     class Meta:
         verbose_name = "Review"
-        verbose_name_plural = "Reviews"
+        verbose_name_plural = "Review"

@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Reviews',
+            name='Review',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('email', models.EmailField(max_length=254)),
@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Review',
-                'verbose_name_plural': 'Reviews',
+                'verbose_name_plural': 'Review',
             },
         ),
         migrations.CreateModel(
