@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load store_tags %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -49,6 +50,7 @@
             <ul class="main-nav nav navbar-nav">
                 <li><a href="{% url 'home_url' %}">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
+            {% get_categories as categories_list %}
                 {% for category in categories_list %}
                     <li><a href="product_list/?category={{ category.id }}">{{ category.name }}</a></li>
                 {% endfor %}

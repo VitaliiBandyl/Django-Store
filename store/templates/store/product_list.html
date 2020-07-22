@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load ratings %}
-
+{% load store_tags %}
 {% block title %}{% endblock title %}
 
 {% block breadcrumb-tree %}
@@ -26,7 +26,7 @@
                         <div class="aside">
                             <h3 class="aside-title">Categories</h3>
                             <div class="checkbox-filter">
-                                {% for category in view.get_categories %}
+                                {% for category in categories_list %}
                                     <div class="input-checkbox">
                                         <input type="checkbox" id="category-{{ forloop.counter }}" name="category"  value="{{ category.id }}">
                                         <label for="category-{{ forloop.counter }}">
@@ -67,7 +67,8 @@
                             <h3 class="aside-title">Brands</h3>
 
                             <div class="checkbox-filter">
-                                {% for brand in view.get_brands %}
+                            {% get_brands as brands_list %}
+                                {% for brand in brands_list %}
                                     <div class="input-checkbox">
                                         <input type="checkbox" id="brand-{{ forloop.counter }}" name="brand" value="{{ brand.id }}">
                                         <label for="brand-{{ forloop.counter }}">

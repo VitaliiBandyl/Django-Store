@@ -3,17 +3,8 @@ from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
 
-from store.models import Category, Product, Brand
+from store.models import Category, Product
 from .forms import ReviewForm
-
-
-class BrandsCategories:
-    """returns all brands"""
-    def get_brands(self):
-        return Brand.objects.all()
-
-    def get_categories(self):
-        return Category.objects.all()
 
 
 class HomeView(ListView):
@@ -23,12 +14,11 @@ class HomeView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
-        context['categories_list'] = Category.objects.filter(product__draft=False)
         context['popular_categories'] = Category.objects.filter(product__draft=False)[0:3]
         return context
 
 
-class ProductListView(BrandsCategories, ListView):
+class ProductListView(ListView):
     """Views for Category"""
 
     def get_queryset(self):
