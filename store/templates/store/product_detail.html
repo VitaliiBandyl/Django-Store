@@ -50,7 +50,7 @@
                             {% ratings object %}
                         </div>
 
-                        <p class="review-link">{{ product.reviews_set.count }} Review(s)</p>
+                        <p class="review-link">{{ product.review_set.count }} Review(s)</p>
 
                         <div>
                             {% if product.discount %}
@@ -62,10 +62,8 @@
                         </div>
                         {{ product.description|safe }}
 
-
-
                         <div class="add-to-cart">
-                            <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
+                            <a href="{% url 'cart:cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
                         </div>
 
                         <ul class="product-links">
@@ -91,7 +89,7 @@
                         <!-- product tab nav -->
                         <ul class="tab-nav">
                             <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                            <li><a data-toggle="tab" href="#tab3">Reviews ({{ product.reviews_set.count }})</a></li>
+                            <li><a data-toggle="tab" href="#tab3">Reviews ({{ product.review_set.count }})</a></li>
                         </ul>
                         <!-- /product tab nav -->
 
@@ -113,7 +111,7 @@
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
-                                            {% for review in product.reviews_set.all %}
+                                            {% for review in product.review_set.all %}
                                                 <li>
                                                     <div class="review-heading">
                                                         <h5 class="name">{{ review.name }}</h5>
@@ -192,7 +190,7 @@
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <a href="{% url 'cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
+                                <a href="{% url 'cart:cart_add' product.id %}" class="add-to-cart-btn"> add to cart</a>
                             </div>
                         </div>
                     </div>

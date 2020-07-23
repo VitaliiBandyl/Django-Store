@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load store_tags %}
+{% load contact_tags %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -108,25 +109,7 @@
 {% endblock content %}
 
 <!-- NEWSLETTER -->
-<div id="newsletter" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
-                    <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
+{% contact_form %}
 <!-- /NEWSLETTER -->
 
 {% include 'include/footer.html' %}

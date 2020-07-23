@@ -10,7 +10,7 @@ class CartAddItem(View):
         cart = Cart(request)
         product = Product.objects.get(id=id)
         cart.add(product=product)
-        return redirect("home_url")
+        return redirect("store:home_url")
 
 
 class CartItemDelete(View):
@@ -19,4 +19,4 @@ class CartItemDelete(View):
         cart = Cart(request)
         product = Product.objects.get(id=id)
         cart.remove(product)
-        return redirect("home_url")
+        return redirect("store:home_url")

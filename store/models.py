@@ -16,7 +16,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def get_absolute_url(self):
-        return reverse('category_list_url')
+        return reverse('store:category_list_url')
 
 
 class Brand(models.Model):
@@ -55,14 +55,14 @@ class Product(models.Model):
         return reverse('store:product_detail_url', kwargs={'slug': self.slug, 'category': self.category})
 
     def get_add_to_cart_url(self):
-        return reverse("add-to-cart", kwargs={
+        return reverse("cart:add-to-cart", kwargs={
             'slug': self.slug
         })
-
-    def get_remove_from_cart_url(self):
-        return reverse("remove-from-cart", kwargs={
-            'slug': self.slug
-        })
+    #
+    # def get_remove_from_cart_url(self):
+    #     return reverse("remove-from-cart", kwargs={
+    #         'slug': self.slug
+    #     })
 
     def get_price_with_discount(self):
         return self.price / 100 * (100 - self.discount)
