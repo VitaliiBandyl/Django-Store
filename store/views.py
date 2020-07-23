@@ -41,6 +41,7 @@ class ProductListView(ListView):
 class ProductDetailView(DetailView):
     """Detail Views for products"""
     model = Product
+    queryset = Product.objects.filter(draft=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()

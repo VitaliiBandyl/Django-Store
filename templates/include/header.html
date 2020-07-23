@@ -33,7 +33,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="{% url 'home_url' %}" class="logo">
+                        <a href="{% url 'store:home_url' %}" class="logo">
                             <img src="{% static 'img/logo.png' %}" alt="">
                         </a>
                     </div>
@@ -43,7 +43,7 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action="{% url 'search' %}" method="get">
+                        <form action="{% url 'store:search' %}" method="get">
                             <input class="input" name="q" placeholder="Search here">
                             <button type="submit" class="search-btn">Search</button>
                         </form>

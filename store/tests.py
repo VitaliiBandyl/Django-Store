@@ -41,6 +41,17 @@ class ProductModelTests(TestCase):
                          f'Incorrect discount precalculated. Expected result is 90.00 but '
                          f'Actual result is {product.get_price_with_discount()}')
 
+    def test_calculation_discount_without_discount(self):
+        """Checks the correctness of the discount calculation when discount = 0"""
+        category = create_category('test_name')
+        brand = create_brand('test_brand')
+        product = create_product(title='test product', brand=brand, description='test', year=2020, country='Ukraine',
+                                 price=100.00, category=category, discount=0)
+
+        self.assertEqual(100.00, product.get_price_with_discount(),
+                         f'Incorrect discount precalculated. Expected result is 100.00 but '
+                         f'Actual result is {product.get_price_with_discount()}')
+
 
 class TestHomeView(TestCase):
 
@@ -97,3 +108,29 @@ class TestHomeView(TestCase):
             response.context['product_list'],
             ['<Product: brand One>', '<Product: brand Two>'], ordered=False
         )
+
+
+class ProductDetailViewTests(TestCase):
+
+    def test_draft_true_product(self):
+        """The detail view of a product with a draft=True returns a 404 not found."""
+        category = create_category('test_name')
+        brand = create_brand('Draft')
+        product = create_product(title='True', brand=brand, description='test', year=2020, country='Ukraine',
+                                 price=100.00, category=category, draft=True)
+
+        url = reverse('product_detail_url', args=(category.url, product.slug))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_draft_false_product(self):
+        """The detail view of a product with a draft=True returns a 404 not found."""
+        category = create_category('test_name')
+        brand = create_brand('Draft')
+        product = create_product(title='False', brand=brand, description='test', year=2020, country='Ukraine',
+                                 price=100.00, category=category, draft=False)
+
+        url = reverse('product_detail_url', args=(category.url, product.slug))
+        response = self.client.get(url)
+        self.assertContains(response, product.title)
+        self.assertEqual(response.status_code, 200)

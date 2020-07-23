@@ -6,7 +6,7 @@
 {% block breadcrumb-tree %}
     <div class="col-md-12">
         <ul class="breadcrumb-tree">
-            <li><a href="{% url 'home_url' %}">Home</a></li>
+            <li><a href="{% url 'store:home_url' %}">Home</a></li>
             <li><a href="/product_list/?category={{ product.category.pk }}">{{ product.category.name }}</a></li>
             <li class="active">{{ product }}</li>
         </ul>
@@ -132,7 +132,7 @@
                                 <!-- Review Form -->
                                 <div class="col-md-3" style="">
                                     <div id="review-form">
-                                        <form class="review-form" action="{% url 'add_review' product.id %}" method="post">
+                                        <form class="review-form" action="{% url 'store:add_review' product.id %}" method="post">
                                             {% csrf_token %}
                                             <input class="input" type="text" name="name" placeholder="Your Name" required>
                                             <input class="input" type="email" name="email" placeholder="Your Email" required>

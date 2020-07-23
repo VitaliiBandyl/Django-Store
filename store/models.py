@@ -52,7 +52,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
-        return reverse('product_detail_url', kwargs={'slug': self.slug, 'category': self.category})
+        return reverse('store:product_detail_url', kwargs={'slug': self.slug, 'category': self.category})
 
     def get_add_to_cart_url(self):
         return reverse("add-to-cart", kwargs={

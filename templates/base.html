@@ -48,7 +48,7 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="{% url 'home_url' %}">Home</a></li>
+                <li><a href="{% url 'store:home_url' %}">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
                 {% get_categories as categories_list %}
                 {% for category in categories_list %}
