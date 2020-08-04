@@ -6,6 +6,8 @@
 ### Task manager: Celery
 ### Broker: Redis
 
+## Site: http://djangostore.pythonanywhere.com/ 
+
 ## Implemented Features:
 ### Main Page
 ##### Two lists with products. First - it`s products with mark NEW. Second products with mark TOP SALES.
